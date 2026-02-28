@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:google_sign_in/google_sign_in.dart';
 import '../models/user.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -13,6 +14,7 @@ class AuthProvider extends ChangeNotifier {
   bool get isAuthenticated => _currentUser != null;
 
   final firebase_auth.FirebaseAuth _auth = firebase_auth.FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   AuthProvider() {
     _auth.authStateChanges().listen((user) {
@@ -21,7 +23,7 @@ class AuthProvider extends ChangeNotifier {
         final isAdmin = user.phoneNumber == '+919999999999';
         _currentUser = User(
           id: user.uid,
-          phoneNumber: user.phoneNumber ?? '',
+          phoneNumber: user.phoneNumber ?? user.email ?? '',
           role: isAdmin ? UserRole.admin : UserRole.farmer,
           name: user.displayName ?? _pendingName ?? 'Farmer',
         );
@@ -113,7 +115,40 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> signInWithGoogle() async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) {
+        _isLoading = false;
+        notifyListeners();
+        return; // User canceled
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final firebase_auth.AuthCredential credential =
+          firebase_auth.GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await _auth.signInWithCredential(credential);
+    } catch (e) {
+      _isLoading = false;
+      notifyListeners();
+      debugPrint("Google Sign-In Error: $e");
+      rethrow;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
   Future<void> logout() async {
+    await _googleSignIn.signOut();
     await _auth.signOut();
     _redirectPath = null;
   }

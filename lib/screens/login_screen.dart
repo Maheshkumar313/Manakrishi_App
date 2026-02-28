@@ -397,13 +397,60 @@ class _LoginScreenState extends State<LoginScreen>
                                     Material(
                                       color: Colors.transparent,
                                       child: InkWell(
-                                        onTap: () {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            const SnackBar(
-                                                content: Text(
-                                                    'Google Sign-In coming soon')),
-                                          );
+                                        onTap: () async {
+                                          final auth =
+                                              context.read<AuthProvider>();
+                                          try {
+                                            await auth.signInWithGoogle();
+
+                                            // Make sure login worked before navigating
+                                            if (auth.isAuthenticated &&
+                                                mounted) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                const SnackBar(
+                                                  content: Text(
+                                                      'Your registration is successfully confirmed! 🎉'),
+                                                  backgroundColor: Colors.green,
+                                                  duration:
+                                                      Duration(seconds: 3),
+                                                ),
+                                              );
+
+                                              // Navigate logic
+                                              if (widget.returnOnSuccess) {
+                                                Navigator.of(context).pop(true);
+                                              } else {
+                                                if (auth.currentUser?.role ==
+                                                    UserRole.admin) {
+                                                  Navigator.of(context)
+                                                      .pushAndRemoveUntil(
+                                                    MaterialPageRoute(
+                                                        builder: (_) =>
+                                                            const AdminDashboardScreen()),
+                                                    (route) => false,
+                                                  );
+                                                } else {
+                                                  Navigator.of(context)
+                                                      .pushAndRemoveUntil(
+                                                    MaterialPageRoute(
+                                                        builder: (_) =>
+                                                            const FarmerHomeScreen()),
+                                                    (route) => false,
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          } catch (e) {
+                                            if (mounted) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                    content: Text(
+                                                        'Google Sign-In failed: $e')),
+                                              );
+                                            }
+                                          }
                                         },
                                         borderRadius: BorderRadius.circular(16),
                                         child: Container(
