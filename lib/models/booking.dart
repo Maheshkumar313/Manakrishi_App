@@ -54,4 +54,41 @@ class Booking {
       date: date ?? this.date,
     );
   }
+
+  // Save to Firebase
+  Map<String, dynamic> toMap() {
+    return {
+      'farmerId': farmerId,
+      'farmerName': farmerName,
+      'cropType': cropType,
+      'landSize': landSize,
+      'sprayType': sprayType,
+      'address': address,
+      'latitude': latitude,
+      'longitude': longitude,
+      'status': status.name, // Save enum as string
+      'date': date.toIso8601String(), // Save DateTime as string
+    };
+  }
+
+  // Load from Firebase
+  factory Booking.fromMap(Map<String, dynamic> map, String documentId) {
+    return Booking(
+      id: documentId,
+      farmerId: map['farmerId'] ?? '',
+      farmerName: map['farmerName'] ?? '',
+      cropType: map['cropType'] ?? '',
+      landSize: (map['landSize'] ?? 0).toDouble(),
+      sprayType: map['sprayType'] ?? '',
+      address: map['address'],
+      latitude: map['latitude'] != null ? (map['latitude']).toDouble() : null,
+      longitude:
+          map['longitude'] != null ? (map['longitude']).toDouble() : null,
+      status: BookingStatus.values.firstWhere(
+        (e) => e.name == map['status'],
+        orElse: () => BookingStatus.unknown,
+      ),
+      date: map['date'] != null ? DateTime.parse(map['date']) : DateTime.now(),
+    );
+  }
 }

@@ -80,6 +80,15 @@ class _LoginScreenState extends State<LoginScreen>
             // Need a tiny delay to ensure auth stream populates currentUser
             await Future.delayed(const Duration(milliseconds: 100));
 
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content:
+                    Text('Your registration is successfully confirmed! 🎉'),
+                backgroundColor: Colors.green,
+                duration: Duration(seconds: 3),
+              ),
+            );
+
             if (widget.returnOnSuccess) {
               Navigator.of(context).pop(true);
             } else {
@@ -287,9 +296,9 @@ class _LoginScreenState extends State<LoginScreen>
                                         label: "OTP",
                                         icon: Icons.lock_outline,
                                         isNumber: true,
-                                        length: 4,
+                                        length: 6,
                                         validator: (value) =>
-                                            (value == null || value.length != 4)
+                                            (value == null || value.length != 6)
                                                 ? l10n.requiredField
                                                 : null,
                                       ),

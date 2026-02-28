@@ -1,0 +1,112 @@
+﻿> Task :gradle:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle:compileKotlin UP-TO-DATE
+> Task :gradle:compileJava NO-SOURCE
+> Task :gradle:compileGroovy NO-SOURCE
+> Task :gradle:pluginDescriptors UP-TO-DATE
+> Task :gradle:processResources UP-TO-DATE
+> Task :gradle:classes UP-TO-DATE
+> Task :gradle:jar UP-TO-DATE
+
+> Task :app:signingReport
+Variant: debug
+Config: debug
+Store: C:\Users\gayat\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 84:A5:FD:F1:77:36:72:8B:EE:E7:CC:40:12:B3:B9:03
+SHA1: 8C:8D:1F:68:30:AE:AC:AE:D4:2A:93:2D:7E:8D:63:EF:48:5A:6A:AC
+SHA-256: 6E:7C:62:26:92:A2:CC:8D:0E:5E:36:B2:9E:4A:52:E7:C2:1B:95:2F:AE:CD:9B:2E:ED:4F:5D:08:D0:4C:51:BB
+Valid until: Thursday, January 6, 2056
+----------
+Variant: release
+Config: debug
+Store: C:\Users\gayat\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 84:A5:FD:F1:77:36:72:8B:EE:E7:CC:40:12:B3:B9:03
+SHA1: 8C:8D:1F:68:30:AE:AC:AE:D4:2A:93:2D:7E:8D:63:EF:48:5A:6A:AC
+SHA-256: 6E:7C:62:26:92:A2:CC:8D:0E:5E:36:B2:9E:4A:52:E7:C2:1B:95:2F:AE:CD:9B:2E:ED:4F:5D:08:D0:4C:51:BB
+Valid until: Thursday, January 6, 2056
+----------
+Variant: profile
+Config: debug
+Store: C:\Users\gayat\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 84:A5:FD:F1:77:36:72:8B:EE:E7:CC:40:12:B3:B9:03
+SHA1: 8C:8D:1F:68:30:AE:AC:AE:D4:2A:93:2D:7E:8D:63:EF:48:5A:6A:AC
+SHA-256: 6E:7C:62:26:92:A2:CC:8D:0E:5E:36:B2:9E:4A:52:E7:C2:1B:95:2F:AE:CD:9B:2E:ED:4F:5D:08:D0:4C:51:BB
+Valid until: Thursday, January 6, 2056
+----------
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\gayat\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 84:A5:FD:F1:77:36:72:8B:EE:E7:CC:40:12:B3:B9:03
+SHA1: 8C:8D:1F:68:30:AE:AC:AE:D4:2A:93:2D:7E:8D:63:EF:48:5A:6A:AC
+SHA-256: 6E:7C:62:26:92:A2:CC:8D:0E:5E:36:B2:9E:4A:52:E7:C2:1B:95:2F:AE:CD:9B:2E:ED:4F:5D:08:D0:4C:51:BB
+Valid until: Thursday, January 6, 2056
+----------
+
+> Task :firebase_auth:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\gayat\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 84:A5:FD:F1:77:36:72:8B:EE:E7:CC:40:12:B3:B9:03
+SHA1: 8C:8D:1F:68:30:AE:AC:AE:D4:2A:93:2D:7E:8D:63:EF:48:5A:6A:AC
+SHA-256: 6E:7C:62:26:92:A2:CC:8D:0E:5E:36:B2:9E:4A:52:E7:C2:1B:95:2F:AE:CD:9B:2E:ED:4F:5D:08:D0:4C:51:BB
+Valid until: Thursday, January 6, 2056
+----------
+
+> Task :firebase_core:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\gayat\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 84:A5:FD:F1:77:36:72:8B:EE:E7:CC:40:12:B3:B9:03
+SHA1: 8C:8D:1F:68:30:AE:AC:AE:D4:2A:93:2D:7E:8D:63:EF:48:5A:6A:AC
+SHA-256: 6E:7C:62:26:92:A2:CC:8D:0E:5E:36:B2:9E:4A:52:E7:C2:1B:95:2F:AE:CD:9B:2E:ED:4F:5D:08:D0:4C:51:BB
+Valid until: Thursday, January 6, 2056
+----------
+
+> Task :geolocator_android:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\gayat\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 84:A5:FD:F1:77:36:72:8B:EE:E7:CC:40:12:B3:B9:03
+SHA1: 8C:8D:1F:68:30:AE:AC:AE:D4:2A:93:2D:7E:8D:63:EF:48:5A:6A:AC
+SHA-256: 6E:7C:62:26:92:A2:CC:8D:0E:5E:36:B2:9E:4A:52:E7:C2:1B:95:2F:AE:CD:9B:2E:ED:4F:5D:08:D0:4C:51:BB
+Valid until: Thursday, January 6, 2056
+----------
+
+> Task :path_provider_android:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\gayat\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 84:A5:FD:F1:77:36:72:8B:EE:E7:CC:40:12:B3:B9:03
+SHA1: 8C:8D:1F:68:30:AE:AC:AE:D4:2A:93:2D:7E:8D:63:EF:48:5A:6A:AC
+SHA-256: 6E:7C:62:26:92:A2:CC:8D:0E:5E:36:B2:9E:4A:52:E7:C2:1B:95:2F:AE:CD:9B:2E:ED:4F:5D:08:D0:4C:51:BB
+Valid until: Thursday, January 6, 2056
+----------
+
+> Task :shared_preferences_android:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\gayat\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 84:A5:FD:F1:77:36:72:8B:EE:E7:CC:40:12:B3:B9:03
+SHA1: 8C:8D:1F:68:30:AE:AC:AE:D4:2A:93:2D:7E:8D:63:EF:48:5A:6A:AC
+SHA-256: 6E:7C:62:26:92:A2:CC:8D:0E:5E:36:B2:9E:4A:52:E7:C2:1B:95:2F:AE:CD:9B:2E:ED:4F:5D:08:D0:4C:51:BB
+Valid until: Thursday, January 6, 2056
+----------
+
+[Incubating] Problems report is available at: file:///C:/Users/gayat/OneDrive/Desktop/My_Projects/manakrishi_app02/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.14/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 7s
+10 actionable tasks: 6 executed, 4 up-to-date
