@@ -9,6 +9,7 @@ import '../../providers/booking_provider.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/language_provider.dart';
 import 'create_booking_screen.dart';
+import '../login_screen.dart';
 
 class FarmerHomeScreen extends StatefulWidget {
   const FarmerHomeScreen({super.key});
@@ -135,12 +136,26 @@ class _FarmerHomeContent extends StatelessWidget {
                   context.read<LanguageProvider>().toggleLanguage();
                 },
               ),
-              IconButton(
-                icon: const Icon(Icons.logout, color: Colors.white),
-                onPressed: () {
-                  context.read<AuthProvider>().logout();
-                },
-              ),
+              Builder(builder: (context) {
+                final authState = context.watch<AuthProvider>();
+                return IconButton(
+                  icon: Icon(
+                      authState.isAuthenticated ? Icons.logout : Icons.login,
+                      color: Colors.white),
+                  onPressed: () {
+                    if (authState.isAuthenticated) {
+                      authState.logout();
+                    } else {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginScreen()),
+                      );
+                    }
+                  },
+                  tooltip: authState.isAuthenticated ? "Logout" : "Login",
+                );
+              }),
             ],
           ),
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
+
 import '../../l10n/app_localizations.dart';
 import '../../core/colors.dart';
 import '../../models/booking.dart';
@@ -14,13 +14,16 @@ class AdminDashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final allBookings = context.watch<BookingProvider>().bookings;
-    
+
     // Sort: Requested first, then by date
-    final sortedBookings = List<Booking>.from(allBookings)..sort((a, b) {
-      if (a.status == BookingStatus.requested && b.status != BookingStatus.requested) return -1;
-      if (a.status != BookingStatus.requested && b.status == BookingStatus.requested) return 1;
-      return b.date.compareTo(a.date);
-    });
+    final sortedBookings = List<Booking>.from(allBookings)
+      ..sort((a, b) {
+        if (a.status == BookingStatus.requested &&
+            b.status != BookingStatus.requested) return -1;
+        if (a.status != BookingStatus.requested &&
+            b.status == BookingStatus.requested) return 1;
+        return b.date.compareTo(a.date);
+      });
 
     return Scaffold(
       appBar: AppBar(
@@ -57,7 +60,9 @@ class AdminBookingCard extends StatelessWidget {
 
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
-      color: booking.status == BookingStatus.requested ? Colors.orange[50] : Colors.white,
+      color: booking.status == BookingStatus.requested
+          ? Colors.orange[50]
+          : Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -68,7 +73,10 @@ class AdminBookingCard extends StatelessWidget {
               children: [
                 Text(
                   booking.farmerName,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium
+                      ?.copyWith(fontWeight: FontWeight.bold),
                 ),
                 Text(
                   _getStatusText(booking.status, l10n),
@@ -80,69 +88,79 @@ class AdminBookingCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            Text("${l10n.cropType}: ${booking.cropType} | ${booking.landSize} Acres"),
+            Text(
+                "${l10n.cropType}: ${booking.cropType} | ${booking.landSize} Acres"),
             Text("${l10n.sprayType}: ${booking.sprayType}"),
-            Text("Location: ${booking.latitude}, ${booking.longitude}"),
+            if (booking.address != null)
+              Text("Address: ${booking.address}")
+            else if (booking.latitude != null && booking.longitude != null)
+              Text("Location: ${booking.latitude}, ${booking.longitude}"),
             const SizedBox(height: 16),
-            
             if (booking.status == BookingStatus.requested)
               Row(
                 children: [
-                   Expanded(
+                  Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                         context.read<BookingProvider>().updateBookingStatus(booking.id, BookingStatus.scheduled);
+                        context.read<BookingProvider>().updateBookingStatus(
+                            booking.id, BookingStatus.scheduled);
                       },
-                      style: ElevatedButton.styleFrom(backgroundColor: AppColors.primaryGreen, foregroundColor: Colors.white),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primaryGreen,
+                          foregroundColor: Colors.white),
                       child: Text(l10n.acceptJob),
                     ),
                   ),
                   const SizedBox(width: 12),
-                   Expanded(
+                  Expanded(
                     child: OutlinedButton(
                       onPressed: () {
                         // Rejecting is just cancelling or special status? Let's say cancel/reject effectively.
                         // For this demo 'reject' is just a status update maybe or remove.
-                        // Let's assume reject = cancel/delete or separate status. 
+                        // Let's assume reject = cancel/delete or separate status.
                         // Simplified: Cancel
-                        context.read<BookingProvider>().cancelBooking(booking.id);
+                        context
+                            .read<BookingProvider>()
+                            .cancelBooking(booking.id);
                       },
-                      style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
+                      style:
+                          OutlinedButton.styleFrom(foregroundColor: Colors.red),
                       child: Text(l10n.rejectJob),
                     ),
                   ),
                 ],
               ),
-
-             if (booking.status == BookingStatus.scheduled)
-               SizedBox(
-                 width: double.infinity,
-                 child: ElevatedButton(
-                    onPressed: () {
-                       context.read<BookingProvider>().updateBookingStatus(booking.id, BookingStatus.inProgress);
-                    },
-                    child: Text("Start Job"),
-                  ),
-               ),
-
-             if (booking.status == BookingStatus.inProgress)
-               SizedBox(
-                 width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                       context.read<BookingProvider>().updateBookingStatus(booking.id, BookingStatus.completed);
-                    },
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                    child: Text(l10n.markComplete),
-                  ),
-               ),
+            if (booking.status == BookingStatus.scheduled)
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    context.read<BookingProvider>().updateBookingStatus(
+                        booking.id, BookingStatus.inProgress);
+                  },
+                  child: Text("Start Job"),
+                ),
+              ),
+            if (booking.status == BookingStatus.inProgress)
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    context.read<BookingProvider>().updateBookingStatus(
+                        booking.id, BookingStatus.completed);
+                  },
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                  child: Text(l10n.markComplete),
+                ),
+              ),
           ],
         ),
       ),
     );
   }
 
-   Color _getStatusColor(BookingStatus status) {
+  Color _getStatusColor(BookingStatus status) {
     switch (status) {
       case BookingStatus.requested:
         return Colors.orange[800]!;
@@ -158,7 +176,7 @@ class AdminBookingCard extends StatelessWidget {
   }
 
   String _getStatusText(BookingStatus status, AppLocalizations l10n) {
-     switch (status) {
+    switch (status) {
       case BookingStatus.requested:
         return l10n.statusRequested;
       case BookingStatus.scheduled:

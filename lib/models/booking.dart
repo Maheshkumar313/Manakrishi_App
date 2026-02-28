@@ -7,8 +7,9 @@ class Booking {
   final String cropType;
   final double landSize;
   final String sprayType;
-  final double latitude;
-  final double longitude;
+  final String? address;
+  final double? latitude;
+  final double? longitude;
   final BookingStatus status;
   final DateTime date;
 
@@ -19,8 +20,9 @@ class Booking {
     required this.cropType,
     required this.landSize,
     required this.sprayType,
-    required this.latitude,
-    required this.longitude,
+    this.address,
+    this.latitude,
+    this.longitude,
     required this.status,
     required this.date,
   });
@@ -32,6 +34,7 @@ class Booking {
     String? cropType,
     double? landSize,
     String? sprayType,
+    String? address,
     double? latitude,
     double? longitude,
     BookingStatus? status,
@@ -44,6 +47,7 @@ class Booking {
       cropType: cropType ?? this.cropType,
       landSize: landSize ?? this.landSize,
       sprayType: sprayType ?? this.sprayType,
+      address: address ?? this.address,
       latitude: latitude ?? this.latitude,
       longitude: longitude ?? this.longitude,
       status: status ?? this.status,

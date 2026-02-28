@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "298673013461",
+    "project_id": "manakrishiapp",
+    "storage_bucket": "manakrishiapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298673013461:android:09e37c08ec33b3729a185c",
+        "android_client_info": {
+          "package_name": "com.manakrishi.manakrishi_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjaKXM9T2FJ4eTtO852DtREpDP3fFNZBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

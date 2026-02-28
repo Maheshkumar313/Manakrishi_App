@@ -1,11 +1,9 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import '../core/colors.dart';
-import '../main.dart'; // For AuthWrapper
-import '../providers/auth_provider.dart';
 import 'farmer/create_booking_screen.dart';
+import 'farmer/farmer_home_screen.dart';
 import 'service_detail_screen.dart';
 
 class ServicesIntroScreen extends StatefulWidget {
@@ -54,38 +52,17 @@ class _ServicesIntroScreenState extends State<ServicesIntroScreen> {
     },
   ];
 
-  void _navigateToLogin({bool clearRedirect = false}) {
-    if (clearRedirect) {
-      context.read<AuthProvider>().clearRedirectPath();
-    }
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => const AuthWrapper()),
+  void _navigateToHome() {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (_) => const FarmerHomeScreen()),
     );
   }
 
   void _onServiceClick(Map<String, dynamic> service) {
     if (service['title'] == "Input & Technology") {
-      final auth = context.read<AuthProvider>();
-
-      if (auth.isAuthenticated) {
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (_) => const CreateBookingScreen()),
-        );
-      } else {
-        auth.setRedirectPath('/create_booking');
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("Please login to access ${service['title']}"),
-            backgroundColor: AppColors.primaryGreen,
-            duration: const Duration(seconds: 1),
-          ),
-        );
-
-        Future.delayed(const Duration(seconds: 1), () {
-          if (mounted) _navigateToLogin();
-        });
-      }
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => const CreateBookingScreen()),
+      );
     } else {
       Navigator.of(context).push(
         MaterialPageRoute(
@@ -135,13 +112,6 @@ class _ServicesIntroScreenState extends State<ServicesIntroScreen> {
                 ],
               ),
             ),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.login, color: Colors.white),
-                onPressed: () => _navigateToLogin(clearRedirect: true),
-                tooltip: "Login",
-              ),
-            ],
           ),
           SliverToBoxAdapter(
             child: Padding(
@@ -185,7 +155,7 @@ class _ServicesIntroScreenState extends State<ServicesIntroScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _navigateToLogin(clearRedirect: true),
+        onPressed: _navigateToHome,
         backgroundColor: AppColors.accentYellow,
         elevation: 4,
         icon: const Icon(Icons.arrow_forward, color: Colors.black),
